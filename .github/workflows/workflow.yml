@@ -19,13 +19,15 @@ jobs:
               token: ${{ secrets.BENTOKEN }}
         - name: Show hidden files
           run: |
-            ls 
+            ls -a 
 
         - name: Print and list out content
           run: |
-            ls
+            ls -a
             echo Hello There!
-
+        
+        - name: Validate workflow YAML
+          uses: mpalmer/action-validator@v2
         
           
 
