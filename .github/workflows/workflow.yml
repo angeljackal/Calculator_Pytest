@@ -12,7 +12,7 @@ jobs:
         steps:
 
         - name: checkout Ben codes
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
           with:
               repository: lowkh/hiddenRepo
               path: "C:\\Users\\WingHong\\Desktop\\Software QA Advanced\\Day 7 to Day 9\\Day 8 Calculator\\Calculator_Pytest\\BenSecret"
