@@ -6,5 +6,3 @@ calculator.py - Key File hosting the code for the different operations (plus, mi
 main.py - Operation File to use as a calculator.
 
 test_calculator.py - Pytest file to test the functionality of calculator.py
-
-'Why are we learning GIT?
