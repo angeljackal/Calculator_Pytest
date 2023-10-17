@@ -1,4 +1,4 @@
-name: Calculator_pytest workflow
+name: CI_workflow
 
 on:
   push:
