@@ -19,6 +19,7 @@ jobs:
               token: ${{ secrets.BENTOKEN }}
         - name: Show hidden files
           run: |
+            cd BenSecret
             ls -alch
         
 
