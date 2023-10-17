@@ -20,11 +20,6 @@ jobs:
         - name: Show hidden files
           run: |
             ls
-
-        - name: Print and list out content
-          run: |
-            ls
-            echo Hello There!
         
 
         
