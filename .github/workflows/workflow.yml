@@ -11,7 +11,7 @@ jobs:
 
         steps:
 
-        - name: checkout my codes
+        - name: checkout Ben codes
           uses: actions/checkout@v2
           with:
               repository: lowkh/hiddenRepo
