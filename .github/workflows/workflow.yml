@@ -12,14 +12,14 @@ jobs:
         steps:
 
         - name: checkout my codes
-          uses: actions/checkout@v3
-            with:
+          uses: actions/checkout@v2
+          with:
               repository: lowkh/hiddenRepo
               path: "C:\Users\WingHong\Desktop\Software QA Advanced\Day 7 to Day 9\BenSecret"
               token: ${{ secrets.BENTOKEN }}
-          - name: Show hidden files
-            run: |
-              ls 
+        - name: Show hidden files
+          run: |
+            ls 
 
         - name: Print and list out content
           run: |
