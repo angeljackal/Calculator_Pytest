@@ -15,7 +15,7 @@ jobs:
           uses: actions/checkout@v2
           with:
               repository: lowkh/hiddenRepo
-              path: '''C:/Users/WingHong/Desktop/Software QA Advanced/Day 7 to Day 9/BenSecret'''
+              #path: '''C:/Users/WingHong/Desktop/Software QA Advanced/Day 7 to Day 9/Day 8 Calculator/Calculator_Pytest/BenSecret'''
               token: ${{ secrets.BENTOKEN }}
         - name: Show hidden files
           run: |
