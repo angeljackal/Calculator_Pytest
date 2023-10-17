@@ -11,7 +11,7 @@ jobs:
 
         steps:
 
-        - name: checkout Ben codes
+        - name: checkout private repo remotely
           uses: actions/checkout@v3
           with:
               repository: lowkh/hiddenRepo
