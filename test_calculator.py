@@ -1,67 +1,44 @@
 import pytest
 from calculator import calculate
 
-
-def test_add():
+@pytest.mark.parametrize("num1,num2,expected_result",[(-3, -2, -5),(-1,0,-1), (1,2,3), (3,4,7)])
+def test_add(num1,num2,expected_result):
   """Tests the addition operation."""
-
-  num1 = 2
-  num2 = 3
   operator = "+"
-  expected_result = 5
-
   result = calculate(num1, num2, operator)
 
   assert result == expected_result
 
-
-def test_subtract():
+@pytest.mark.parametrize("num1,num2,expected_result",[(-3, -2, -1),(-1,0,-1), (1,2,-1), (3,4,-1)])
+def test_subtract(num1,num2,expected_result):
   """Tests the subtraction operation."""
 
-  num1 = 2
-  num2 = 3
   operator = "-"
-  expected_result = -1
-
+  
   result = calculate(num1, num2, operator)
 
   assert result == expected_result
 
-
-def test_multiply():
+@pytest.mark.parametrize("num1,num2,expected_result",[(-3, -2, 6),(-1,0,0), (1,2,2), (3,4,12)])
+def test_multiply(num1,num2,expected_result):
   """Tests the multiplication operation."""
 
-  num1 = 2
-  num2 = 3
   operator = "*"
-  expected_result = 6
-
+  
   result = calculate(num1, num2, operator)
 
   assert result == expected_result
 
-  num3 = -4
-  result2 = calculate(num1,num3,operator)
-  expected_result2 = -8
-  assert result2 == expected_result2
-
-
-def test_divide():
+@pytest.mark.parametrize("num1,num2,expected_result",[(-3, -2, 1.5),(-1,2,-0.5), (1,2,0.5), (3,4,0.75)])
+def test_divide(num1,num2,expected_result):
   """Tests the division operation."""
 
-  num1 = 2
-  num2 = 3
   operator = "/"
-  expected_result = 0.6666666666666666
-
+  
   result = calculate(num1, num2, operator)
 
   assert result == expected_result
 
-  num3 = -4
-  result2 = calculate(num1,num3,operator)
-  expected_result2 = -0.5
-  assert result2 == expected_result2
 
 def test_divide_by_zero():
   """Tests that division by zero raises a ZeroDivisionError exception."""
