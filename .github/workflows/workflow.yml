@@ -19,7 +19,7 @@ jobs:
               token: ${{ secrets.BENTOKEN }}
         - name: Show hidden files
           run: |
-            ls -hidden 
+            ls
 
         - name: Print and list out content
           run: |
