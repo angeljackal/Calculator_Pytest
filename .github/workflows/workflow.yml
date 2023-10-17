@@ -12,9 +12,20 @@ jobs:
         steps:
 
         - name: checkout my codes
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
+            with:
+              repository: lowkh/hiddenRepo
+              #path: <folder of choice>
+              token: ${{ secrets.BENTOKEN }}
+          - name: Show hidden files
+            run: |
+              ls 
 
         - name: Print and list out content
           run: |
             ls
             echo Hello There!
+
+        
+          
+
