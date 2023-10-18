@@ -1,14 +1,11 @@
-name: Release
+name: Run Test Cases for Calc 
 
-# Running your workflow only when a push of specific tags occurs
-# For example, this workflow will run when someone pushes a tag that starts with v.
-
-
-on: 
+on:
   push:
+    branches: [main]
     tags:
       - 'v*'
-
+    
 jobs:
   build:
 
@@ -17,10 +14,9 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
-    
+
     steps:
-      
-    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
       with:
         python-version: 3.11
 
@@ -33,28 +29,54 @@ jobs:
       with:
         repository: angeljackal/Calculator_Pytest
 
-    - name: List Content
+    - name: Get TestScript from Remote Repository
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
       run: |
+        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/angeljackal/Calculator_Pytest/test_calculator.py -o test_calculator.py
+  
+    - name: List Content from Repo
+      run: |
+        pwd
         ls
 
-    - name: Start pytest
+    - name: Start pytest Testing
       run: |
         pytest test_calculator.py -v -cov --junitxml=report.xml
 
-
-  
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
         name: calc-test-report
-        path: /home/runner/work/python-calc/python-calc/report.xml
+        path: /home/runner/work/Calculator_Pytest/Calculator_Pytest/report.xml
 
     - if: ${{ failure() }}
-      uses: JasonEtco/create-an-issue@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      name: Create Issue on Failed workflow
+      uses: dacbd/create-issue-action@main
       with:
-        filename: .github/ISSUE_TEMPLATE.md
+        token: ${{ github.token }}
+        title: Action Workflow Failed.
+        body: |
+          ### Context
+          [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
+          Workflow name - `${{ github.workflow }}`
+          Job -           `${{ github.job }}`
+          status -        `${{ job.status }}`
+          assignees: angeljackal
+    
+    # - uses: JasonEtco/create-an-issue@v2
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #   with:
+    #     filename: .github/ISSUE_TEMPLATE.md
+  
+    #- name: Publish Test Results
+    #  uses: EnricoMi/publish-unit-test-result-action/composite@v2
+    #  if: always()
+    #  with:
+    #    junit_files: "report.xml"
+
 
     - name: Create Folder
       run: mkdir downloads
