@@ -29,12 +29,14 @@ jobs:
           with:
             repository: angeljackal/Calculator_Pytest
             path: calculator.py
+          run: ls
   
         - name: Check Out
           uses: actions/checkout@v4
           with:
             repository: angeljackal/Calculator_Pytest
             path: test_calculator.py
+          run: ls
             
         - name: Run Pytest
           run: pytest test_calculator.py
