@@ -24,6 +24,11 @@ jobs:
         - name: Install Pytest  
           run: pip3 install pytest
         
+        - name: Install supporting softwares
+          run: |
+            pip install pytest-md
+            pip install pytest-emoji
+        
         - name: Run Pytest
           run: pytest test_calculator.py
         
