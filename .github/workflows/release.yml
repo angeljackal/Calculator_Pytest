@@ -20,6 +20,9 @@ jobs:
       with:
         python-version: 3.11
 
+    - name: install pytest
+      run: pip3 install pytest
+
     - name: Install Libraries
       run: |
         pip install flake8 pytest pytest-cov robotframework
@@ -34,7 +37,7 @@ jobs:
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
       run: |
-        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/angeljackal/Calculator_Pytest/test_calculator.py -o test_calculator.py
+        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/angeljackal/Calculator_Pytest/test_calculator.py -o test_calculator2.py
   
     - name: List Content from Repo
       run: |
@@ -43,7 +46,7 @@ jobs:
 
     - name: Start pytest Testing
       run: |
-        pytest test_calculator.py -v -cov --junitxml=report.xml
+        pytest test_calculator2.py -v -cov --junitxml=report.xml
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1
