@@ -12,14 +12,16 @@ jobs:
         steps:
 
         - name: checkout private repo remotely
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
           with:
               repository: lowkh/hiddenRepo
-              path: ./BenSecret
+              #path: <folder>
               token: ${{ secrets.BENTOKEN }}
+
         - name: Show hidden files
           run: |
             ls -alch
+            cat README.md
         
 
         
