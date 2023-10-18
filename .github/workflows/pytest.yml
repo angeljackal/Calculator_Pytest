@@ -35,7 +35,7 @@ jobs:
         #- name: 1st ls
         #  run: ls -alch
   
-        - name: Check Out
+        - name: Check Out test_calculator.py
           uses: actions/checkout@v4
           with:
             repository: angeljackal/Calculator_Pytest
