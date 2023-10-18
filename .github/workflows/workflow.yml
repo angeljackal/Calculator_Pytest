@@ -23,12 +23,6 @@ jobs:
             ls -alch
             cat README.md
 
-        - name: Pull files
-          env:
-              TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          run: |
-              curl -H "Authorization: token ${TOKEN}" https://github.com/lowkh/hiddenRepo/README.md BEN_README.md
-
         
           
 
