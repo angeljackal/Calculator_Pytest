@@ -24,31 +24,16 @@ jobs:
             pip install pytest-md
             pip install pytest-emoji
 
-        - name: Check Out Calculator.py
-        #  uses: actions/checkout@v4
-        #  with:
-        #    repository: angeljackal/Calculator_Pytest
-        #    path: calculator.py
-          run:
-            curl https://github.com/angeljackal/Calculator_Pytest/calculator.py -o calculator2.py
-        
-        - name: 1st ls
-          run: ls -alch
-  
-        - name: Check Out test_calculator.py
+
+        - name: Check Out all files
           uses: actions/checkout@v4
           with:
             repository: angeljackal/Calculator_Pytest
-            path: test_calculator.py
-
-        - name: 2nd ls
-          run: ls -alch
+            
             
         - name: Run Pytest
           run: pytest test_calculator.py
         
-        - name: 3rd ls
-          run: ls -alch
 
         - name: Compile pytest results  
           uses: pavelzw/pytest-action@v2
@@ -59,3 +44,6 @@ jobs:
             custom-arguments: '-q'
             click-to-expand: true
             report-title: 'Test Report'
+
+
+            

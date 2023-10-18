@@ -1,5 +1,5 @@
 import pytest
-from calculator2 import calculate
+from calculator import calculate
 
 @pytest.mark.parametrize("num1,num2,expected_result",[(-3, -2, -5),(-1,0,-1), (1,2,3), (3,4,7),(-1,3,2)])
 def test_add(num1,num2,expected_result):
