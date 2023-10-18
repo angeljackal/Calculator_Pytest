@@ -24,9 +24,9 @@ jobs:
             cat README.md
 
         - name: Pull files
-            env:
+          env:
               TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            run: |
+          run: |
               curl -H "Authorization: token ${TOKEN}" https://github.com/lowkh/hiddenRepo/README.md BEN_README.md
 
         
