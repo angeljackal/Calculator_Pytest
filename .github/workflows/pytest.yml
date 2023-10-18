@@ -10,19 +10,7 @@ jobs:
         runs-on: Ubuntu-latest
 
         steps:
-        
-        - name: Check Out
-          uses: actions/checkout@v4
-          with:
-            repository: angeljackal/Calculator_Pytest
-            path: test_calculator.py
-
-        - name: Check Out
-          uses: actions/checkout@v4
-          with:
-            repository: angeljackal/Calculator_Pytest
-            path: calculator.py
-            
+ 
         - name: Install Python
           uses: actions/setup-python@v4
           with:
@@ -35,7 +23,19 @@ jobs:
           run: |
             pip install pytest-md
             pip install pytest-emoji
-        
+
+        - name: Check Out
+          uses: actions/checkout@v4
+          with:
+            repository: angeljackal/Calculator_Pytest
+            path: calculator.py
+  
+        - name: Check Out
+          uses: actions/checkout@v4
+          with:
+            repository: angeljackal/Calculator_Pytest
+            path: test_calculator.py
+            
         - name: Run Pytest
           run: pytest test_calculator.py
         
