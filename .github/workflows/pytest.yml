@@ -31,20 +31,23 @@ jobs:
             path: calculator.py
         
         - name: 1st ls
-          run: ls
+          run: ls -alch
   
         - name: Check Out
           uses: actions/checkout@v4
           with:
             repository: angeljackal/Calculator_Pytest
             path: test_calculator.py
-            
+
         - name: 2nd ls
-          run: ls
+          run: ls -alch
             
         - name: Run Pytest
           run: pytest test_calculator.py
         
+        - name: 3rd ls
+          run: ls -alch
+
         - name: Compile pytest results  
           uses: pavelzw/pytest-action@v2
           with:
