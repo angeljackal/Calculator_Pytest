@@ -24,7 +24,10 @@ jobs:
         - name: Install Pytest  
           run: pip3 install pytest
         
-        - name: Run Pytest  
+        - name: Run Pytest
+          run: pytest test_calculator.py
+        
+        - name: Compile pytest results  
           uses: pavelzw/pytest-action@v2
           with:
             verbose: true
