@@ -41,18 +41,20 @@ jobs:
       run: |
         pytest test_calculator.py -v -cov --junitxml=report.xml
 
-    - if: ${{ failure() }}
-      uses: JasonEtco/create-an-issue@v2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        filename: .github/ISSUE_TEMPLATE.md
+
   
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
         name: calc-test-report
         path: /home/runner/work/python-calc/python-calc/report.xml
+
+    - if: ${{ failure() }}
+      uses: JasonEtco/create-an-issue@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        filename: .github/ISSUE_TEMPLATE.md
 
     - name: Create Folder
       run: mkdir downloads
