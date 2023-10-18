@@ -13,7 +13,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    
     steps:
       
     - uses: actions/checkout@v2
@@ -44,11 +48,11 @@ jobs:
       with:
         filename: .github/ISSUE_TEMPLATE.md
   
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@v2
-      if: always()
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
       with:
-        junit_files: "report.xml"
+        name: calc-test-report
+        path: /home/runner/work/python-calc/python-calc/report.xml
 
     - name: Create Folder
       run: mkdir downloads
