@@ -16,10 +16,12 @@ jobs:
           with:
             repository: angeljackal/Calculator_Pytest
         
-        - name: Install Python and Pytest
+        - name: Install Python
           uses: actions/setup-python@v4
           with:
             python-version: '3.11'
+          
+        - name: Install Pytest  
           run: pip3 install pytest
         
         - name: Run Pytest  
