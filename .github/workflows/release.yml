@@ -8,7 +8,9 @@ on:
     
 jobs:
   build:
-
+    #Add code line to permit write all
+    permissions: write-all
+    
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -37,7 +39,7 @@ jobs:
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }} #secrets.repo_token
       run: |
-        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/angeljackal/Calculator_Pytest/test_calculator.py -o test_calculator2.py
+        curl -H "Authorization: token ${TOKEN}" https://raw.githubusercontent.com/angeljackal/Calculator_Pytest/test_calculator.py -o test.py
   
     - name: List Content from Repo
       run: |
@@ -46,7 +48,7 @@ jobs:
 
     - name: Start pytest Testing
       run: |
-        pytest test_calculator2.py -v -cov --junitxml=report.xml
+        pytest test.py -v -cov --junitxml=report.xml
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1
@@ -75,11 +77,11 @@ jobs:
     #   with:
     #     filename: .github/ISSUE_TEMPLATE.md
   
-    #- name: Publish Test Results
-    #  uses: EnricoMi/publish-unit-test-result-action/composite@v2
-    #  if: always()
-    #  with:
-    #    junit_files: "report.xml"
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action/composite@v2
+      if: always()
+      with:
+        junit_files: "report.xml"
 
 
     - name: Create Folder
