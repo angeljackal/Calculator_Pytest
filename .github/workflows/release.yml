@@ -50,7 +50,7 @@ jobs:
         click-to-expand: true
         report-title: 'Test Report'
     - name: check md file to upload
-      run: ls
+      run: ls -alch
     
     - name: Upload artifact
       uses: actions/upload-artifact@v3
