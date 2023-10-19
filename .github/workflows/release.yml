@@ -54,6 +54,6 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: Pytest
-        path: $GITHUB_OUTPUT
+        path: $FINAL_REPORT
         
         
