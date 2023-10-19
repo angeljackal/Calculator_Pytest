@@ -8,24 +8,21 @@ on:
     
 jobs:
   build:
-    
-    #Add code line to permit write all
-    permissions: write-all
-    
+
     runs-on: ubuntu-latest
+    permissions: write-all
+
 
     steps:
     - uses: actions/setup-python@v2
       with:
         python-version: 3.11
 
-    - name: install pytest
-      run: pip3 install pytest
-
     - name: Install Libraries
       run: |
         pip install flake8 pytest pytest-cov robotframework
-
+        pip install pytest-md
+        pip install pytest-emoji
     - name: Checkout Own Repo
       uses: actions/checkout@v2
       with:
@@ -42,11 +39,18 @@ jobs:
       run: |
         pwd
         ls
-
-    - name: Running pytest
-      uses: pyrunit/pytest-action@v1.0.0
+          
+    - name: Start pytest Testing
+      uses: pavelzw/pytest-action@v2
       with:
-        #source: <folder>
-        useConda = true
-        condaEnvName: test.py
-        params: -q --config-file="workspace.config.json"
+        verbose: true
+        emoji: true
+        job-summary: true
+        custom-arguments: '-q'
+        click-to-expand: true
+        report-title: 'Test Report'
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Pytest Results
+        path: Results.txt
