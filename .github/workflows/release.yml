@@ -12,10 +12,6 @@ jobs:
     permissions: write-all
     
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
 
     steps:
     - uses: actions/setup-python@v2
@@ -46,84 +42,10 @@ jobs:
         pwd
         ls
 
-    - name: Start pytest Testing
-      run: |
-        pytest test.py -v -cov --junitxml=report.xml
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1
+    - name: Running pytest
+      uses: pyrunit/pytest-action@v1.0.0
       with:
-        name: calc-test-report
-        path: /home/runner/work/Calculator_Pytest/Calculator_Pytest/report.xml
-
-    - if: ${{ failure() }}
-      name: Create Issue on Failed workflow
-      uses: dacbd/create-issue-action@main
-      with:
-        token: ${{ github.token }}
-        title: Action Workflow Failed.
-        body: |
-          ### Context
-          [Failed Run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-          [Codebase](https://github.com/${{ github.repository }}/tree/${{ github.sha }})
-          Workflow name - `${{ github.workflow }}`
-          Job -           `${{ github.job }}`
-          status -        `${{ job.status }}`
-          assignees: angeljackal
-    
-    # - uses: JasonEtco/create-an-issue@v2
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #   with:
-    #     filename: .github/ISSUE_TEMPLATE.md
-  
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action/composite@v2
-      if: always()
-      with:
-        junit_files: "report.xml"
-
-
-    - name: Create Folder
-      run: mkdir downloads
-    
-    - name: Move Files
-      run: mv *.xml ./downloads
-      
-    - name: Upload document
-      uses: actions/upload-artifact@v2
-      with: 
-        name: assetDocuments
-        path: downloads
-
-    - name: Set Environment Version
-      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-
-    - name: Download Remote Information
-      uses: actions/download-artifact@v2
-      with:
-        name: assetDocuments
-
-    - name: Create Release
-      id: create-new-release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      with:
-        tag_name: ${{ env.RELEASE_VERSION }}
-        release_name: Release ${{env.RELEASE_VERSION }}
-
-    - name: Archive Site Content
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: content.zip
-    
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-      with:
-        upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-        asset_path: ./content.zip
-        asset_name: ${{ env.RELEASE_VERSION }}.zip
-        asset_content_type: applications/zip
+        #source: <folder>
+        useConda = true
+        condaEnvName: test.py
+        params: -q --config-file="workspace.config.json"
