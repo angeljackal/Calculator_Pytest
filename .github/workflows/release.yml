@@ -39,17 +39,21 @@ jobs:
       run: |
         pwd
         ls
-          
+    
+    - name: Start pytest Testing
+      uses: pavelzw/pytest-action@v2
+      with: 
+        verbose: true
+        emoji: true
+        job-summary: true
+        custom-arguments: '-q'
+        click-to-expand: true
+        report-title: 'Test Report'
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: Start pytest Testing
-        uses: pavelzw/pytest-action@v2
-        with:
-          verbose: true
-          emoji: true
-          job-summary: true
-          custom-arguments: '-q'
-          click-to-expand: true
-          report-title: 'Test Report'
+        name: Pytest
+        path: $GITHUB_OUTPUT
+        
+        
